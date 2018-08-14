@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML Video Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="player">
+    <video class="player__video viewer" src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"></video>
+
+    <div class="player__controls">
+        <div class="progress">
+            <div class="progress__filled"></div>
+        </div>
+        <button id="playBtn" class="player__button toggle" title="Toggle Play">►</button>
+        <input type="range" name="volume" class="player__slider" min="0" max="1" step="0.05" value="1">
+        <input type="range" name="playbackRate" class="player__slider" min="0.5" max="2" step="0.1" value="1">
+        <button data-skip="-10" class="player__button">« 10s</button>
+        <button data-skip="25" class="player__button">25s »</button>
+    </div>
+</div>
+
+<script>
+    var player = document.querySelector('.player');
+    var video = player.querySelector('.viewer');
+    var progressBar = player.querySelector('.progress__filled');
+    var buttonPlayOrPaused = player.querySelector('.toggle');
+    var skipButtons = player.querySelectorAll('[data-skip]');
+    var ranges = player.querySelectorAll('.player__slider');
+
+
+    function togglePlay (){
+        if(video.paused){
+            video.play();
+        }else{
+            video.pause();
+        }
+    }
+
+    //or this
+
+    // function togglePlay (){
+    //      var videoPlayOrPaused = video.paused ? 'play' : 'pause';
+    //      video[videoPlayOrPaused]();
+    // }
+
+    function changeButton (){
+        var icon = this.paused ? '❚ ❚' : '►';
+        buttonPlayOrPaused.textContent = icon;
+    }
+
+    // SKIP -10s 25s button
+
+    skipButtons.forEach(function (button) {
+        button.addEventListener('click', skipVideo);
+    });
+
+    //or this
+
+    // skipButtons.forEach( button => button.addEventListener('click', skipVideo));
+
+    function skipVideo(){
+       // var videoDuration = video.duration; //длительность видеo
+        console.log(this.dataset);
+        video.CurrentTime += parseFloat(this.dataset.skipVideo);
+    }
+
+    //sliders for volume and ...
+
+    function handleRangeUpdate(){
+        video[this.name] = this.value;
+    }
+
+    function handleProgres(){
+        var percent = (video.currentTime / video.duration)*1000;
+        progressBar.style.flexBasis = percent + '%';
+    }
+
+    ranges.forEach(function(range){
+        range.addEventListener('change',handleRangeUpdate);
+    });
+    ranges.forEach(function(range){
+        range.addEventListener('mousemove',handleRangeUpdate);
+    });
+
+
+    video.addEventListener('click', togglePlay);
+    video.addEventListener('play', changeButton);
+    video.addEventListener('pause', changeButton);
+    video.addEventListener('timeupdate',handleProgres);
+    buttonPlayOrPaused.addEventListener('click', togglePlay);
+
+
+
+</script>
+</body>
+</html>

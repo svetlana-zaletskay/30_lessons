@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<link>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<link rel="stylesheet" href="style-les-1.css" type="text/css"/>
+</head>
+<body>
+<div class="wrapper">
+    <div class="wrapper-button">
+        <button data-key="81" class="key">Q</button>
+        <button data-key="87" class="key">W</button>
+        <button data-key="69" class="key">E</button>
+    </div>
+    <audio data-key="81" src="audio/0025.mp3"></audio>
+    <audio data-key="87" src="audio/0044.mp3"></audio>
+    <audio data-key="69" src="audio/0086.mp3"></audio>
+</div>
+<style>
+    .wrapper{
+        background-color: beige;
+        margin: 0 auto;
+        width: 70%;
+        height: 130px;
+
+    }
+    .wrapper-button{
+        text-align: -webkit-center;
+        padding: 45px;
+
+    }
+    .key{
+        width: 50px;
+        height: 30px;
+        margin: 0 10px;
+        transition : all 0.5s; /*делает анимацию*/
+        border: 3px solid darkmagenta;
+    }
+    .playing{
+        transform: scale(1.5); /*трансформирует элемент, смещает, пооворачивает, увеличивает*/
+        border-color: black;
+        box-shadow: 0 2px 5px black;
+    }
+</style>
+<script type="text/javascript">
+    //1.Найди кейкоды клавиш.
+    //2.свяжи кнопки с одинаковыми кейкодами;
+    //3.привяжи к ним аудио;
+    //4.добавь класс с бордером при нажатии на кнопку;
+    //5.создать функцию на удаление анимации после клика;
+    var key;
+    window.addEventListener('keydown', function getKeyCode(c)/*обработчик события*/ {
+        var keyCode = c.keyCode;
+        /*получи кейкод*/
+        var audio = document.querySelector('audio[data-key="' + keyCode + '"]');//обязательно взять в кавычки "''"; найди тег аудио с  атрибутом и добавь значение переменной  куйкод;
+        key = document.querySelector('.key[data-key="' + keyCode + '"]');
+        if (!audio)return;
+        audio.currentTime = 0; //звук будет воспроизводится сначала;
+        audio.play();
+        key.classList.add('playing');
+    });
+    function removeTransition(c) {
+        if (c.propertyName !== 'transform')return;
+        this.classList.remove('playing');//ccылается на то же 'с', удали в списке класс
+    }
+    var keys = document.querySelectorAll('.key');
+    keys.forEach(function (key) {
+        key.addEventListener('transitionend', removeTransition);//когда закончится событие transition, запуститься функция removeTransition
+    });
+
+    //Метод выполняет предоставленную функцию один раз для каждого элемента массива.
+    //keys.forEach(key => key.addEventListener('transition',removeTransition));
+
+</script>
+</body>
+</html>

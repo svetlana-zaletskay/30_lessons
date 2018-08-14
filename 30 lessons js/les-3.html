@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="controls">
+        <label for="sp acing">Spacing:</label>
+        <input type="range" min="10" max="200" value="10" name="spacing" data-sizing="px" class="range">
+        <!--value-начальное значение элемента,будет отправлено на сервер-->
+
+        <label for="blur">Blur:</label>
+        <input type="range" min="0" max="25" value="10" name="blur" data-sizing="px" class="range">
+
+        <label for="base">Base:</label>
+        <input type="color" name="base" value="#000000">
+        <!--"color"- палитра-->
+    </div>
+
+    <div class="wrapper-img"><img src="http://unsplash.it/800/500?image=899" width="500px" height="350px"></div>
+
+<style>
+    :root{
+        --base: #ffc600;/*база*/
+        --spacing: 10px;/*расстояние*/
+        --blur: 0px;/*размытие*/
+    }
+    input[type="range"]{
+        -webkit-appearance: none;
+        border-radius:2px;
+        width:200px;
+        height:3px;
+        background-image:-webkit-linear-gradient(left ,#f22 0%,#f22 50%,#fff 50%, #fff 100%);
+        box-shadow:inset #ebb 0 0 5px;
+        outline : none;
+        transition:.1s;
+    }
+    input[type="range"]::-webkit-slider-thumb{
+        -webkit-appearance: none;
+        width:10px;
+        height:10px;
+        background:#f22;
+        border-radius:50%;
+        transition:.1s;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover,
+    input[type="range"]::-webkit-slider-thumb:active{
+        width:16px;
+        height:16px;
+    }
+    img{
+    margin: 0 auto;
+    padding: var(--spacing);
+    background-color: var(--base);
+    filter: blur(var(--blur));
+    }
+    .controls{
+        margin: 20px auto;
+        text-align: -webkit-center;
+    }
+    .wrapper-img{
+        margin: 0 auto;
+        text-align: -webkit-center;
+    }
+</style>
+<script>
+    var inputs = document.querySelectorAll('.controls input');//ищет элемент с таким параметром
+
+    function handleUpdate(){
+        var suffix = this.dataset.sizing || '';//позволяет из javascript получить доступ в режиме чтения и записи к атрибутам data-*, установленным для html-элемента.
+                                              // || '' те эл. которые не имеют атрибута data будут выводить пусто;
+                               //document.documentElement -- свойство только для чтения,
+                               // которое возвращает элемент Element , который является коренным элементом документа
+                               // document (например элемент <html> для HTML документов).
+        var name = this.name;
+        var value = this.value;
+        document.documentElement.style.setProperty('--' + this.name, this.value + suffix);
+//        document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    }
+
+    inputs.forEach(function(input){ //перебирает массив по элементам
+        input.addEventListener('change', handleUpdate); //навешивает событие на изменение
+    });
+    inputs.forEach(function(input){ //перебирает массив по элементам
+        input.addEventListener('mousemove', handleUpdate)//навешивает событие на мышь, когда она движется внутри обл
+    });
+</script>
+</body>
+</html>
