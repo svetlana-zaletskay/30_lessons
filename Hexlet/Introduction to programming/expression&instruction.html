@@ -1,0 +1,29 @@
+<body></body>
+<script>
+    const square = (a) => {
+        var sum = a*a;
+        console.log(sum);
+        return sum;
+    };
+    const sumOfSquares = (b,c) => {
+        var sum2 = square(b) + square(c);
+        console.log(sum2);
+        return sum2;
+    };
+    const squareSumOfSquares = (d,f) => {
+        var sum3 =  square(sumOfSquares(d,f));
+        console.log(sum3);
+        return sum3;
+    };
+
+    // const square = (a) => {return a*a;};
+    // const sumOfSquares = (b,c) => {return square(b) + square(c);};
+    // const squareSumOfSquares = (d,f) => {return square(sumOfSquares(d,f));}
+
+    // const squareSumOfSquares = (d,f) => {
+    //     var sum = ((d*d)+(f*f))*((d*d)+(f*f));
+    //     console.log(sum);
+    // }
+    squareSumOfSquares(-3,7);
+
+</script>

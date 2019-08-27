@@ -1,0 +1,26 @@
+<body></body>
+<script>
+    const isPrime = (num) => {
+        var isPrimeValue = true;
+        for (var i = 2; i <= num; i++) {
+            if (num % i === 0 && i !== num) {
+                isPrimeValue = false;
+                break;
+            }
+        }
+        if(num <= 1){
+            return false;
+        }
+        return isPrimeValue;
+    };
+    isPrime(4);
+    // function cheackNumber(num){
+    //     for (var i = 2; i <= num; i++){
+    //         if (num % i === 0){
+    //             break;
+    //         }
+    //     }
+    //     (i !== num) ? console.log(false) : console.log(true);
+    // }
+    // cheackNumber(4);
+</script>

@@ -1,0 +1,42 @@
+<body></body>
+<script>
+    //cчитаем символы в строке;
+    //считает заглавные буквы;
+    const bigLettersCount = (str)=> {
+        debugger;
+        let count =0;
+        for(let i =0; i<str.length; i++)
+            if(str[i] === str[i].toUpperCase()) {
+                count++;
+            }
+        return count;
+    };
+    //bigLettersCount(' DD');
+
+    const compare =(first,second) => {
+        debugger;
+        //Если в первой строке больше заглавных символов, то возвращается 1.
+        //Если во второй строке больше заглавных символов, то возвращается -1.
+        //Иначе возвращается 0.
+        const firstCount = bigLettersCount(first);
+        const secondCount = bigLettersCount(second);
+        if(firstCount > secondCount) {
+            return 1;
+        }else if(firstCount < secondCount){
+            return -1;
+        }else if(firstCount === secondCount){
+            return 0;
+        }
+    };
+
+    //больше чем
+    const greaterThan = (first,second) => {
+        debugger;
+        compare(first,second) === 1;
+    };
+    greaterThan('AD', 'ad sd');
+
+    const lessThan = (first, second) => {
+        compare(first, second) === -1;
+    };
+</script>
