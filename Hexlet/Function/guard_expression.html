@@ -1,0 +1,19 @@
+<body>test</body>
+<script>
+    const isPalindrome = (str) => {
+        if (str.length <= 1) {
+            return true; //терминальное условие
+        }
+
+        const firstSymbol = str[0];
+        const lastSymbol = str[str.length - 1];
+
+        if (firstSymbol !== lastSymbol) {
+            return false;
+        }
+
+        const stringWithoutFirstAndLastSymbols = str.substring(1, str.length - 1);
+        return isPalindrome(stringWithoutFirstAndLastSymbols); //рекурсия
+    };
+    isPalindrome('abbbba');
+</script>

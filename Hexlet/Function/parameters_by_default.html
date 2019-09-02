@@ -1,0 +1,47 @@
+<body></body>
+<script>
+    const substr = (str,a,b) => {
+        var newStr ='';
+
+        if(a<0 || b<0){
+            return newStr;
+        }
+        else if(str.length === 0){
+            return newStr;
+        }
+
+        else if((a === undefined || a<=0)||(b<=0 || b === undefined)){
+            return str;
+        }
+
+        for(a; a<=str.length-1;a++){
+            debugger;
+            newStr = newStr.concat(str[a]);
+            console.log(newStr);
+        }
+    };
+    substr('');
+
+    //решение препода
+
+    // export default (str, index = 0, substrLength = str.length) => {
+    //     if (index >= str.length) {
+    //         return '';
+    //     }
+    //     const currentIndex = index < 0 ? 0 : index;
+    //
+    //     let lastIndex = currentIndex + (substrLength - 1);
+    //
+    //     if (lastIndex + 1 < currentIndex) {
+    //         lastIndex = currentIndex;
+    //     } else if (lastIndex > str.length - 1) {
+    //         lastIndex = str.length - 1;
+    //     }
+    //     let result = '';
+    //     for (let i = currentIndex; i <= lastIndex; i += 1) {
+    //         result = `${result}${str[i]}`;
+    //     }
+    //     return result;
+    // };
+
+</script>

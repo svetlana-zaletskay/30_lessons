@@ -1,0 +1,35 @@
+<body>
+<script>
+
+    let body = document.body;
+
+    let buildTable = document.createElement("table");
+
+    let addTable = body.prepend(buildTable);
+
+    let tr = (el) =>{
+        return document.createElement("tr");
+    };
+
+    let td = (el) => {
+        return document.createElement("td");
+    };
+
+    let addText = (text, el) => {
+        let buildText = document.createTextNode(text);
+        el.appendChild(buildText);
+        return el;
+    };
+
+    let buildTD = td();
+    let buildTR = tr();
+
+    addText('test', buildTD); //добавляет текст в <td>
+
+    buildTR.prepend(buildTD); //добавляет <td> в <tr>
+
+    buildTable.prepend(buildTR); //добавляет <tr> в <table>
+
+</script>
+</body>
+
